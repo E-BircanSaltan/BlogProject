@@ -40,6 +40,20 @@ namespace BlogProject.Api.Controllers
   
         }
 
+
+        [HttpPost("/UpdateCategory")]
+        [ValidationFilter(typeof(CategoryValidator))]
+        public async Task<IActionResult> UpdateCategory(CategoryRequestDTO categoryRequestDTO)
+        {
+
+            Category category = await _categoryServise.GetAsync(q => q.Guid == categoryRequestDTO.Guid);
+            category.Name = categoryRequestDTO.Name;
+            await _categoryServise.UpdateAsync(category);
+
+            return Ok(Sonuc<bool>.SuccussWithData(true));
+
+        } 
+
         [HttpGet("/Categories")]
         [ProducesResponseType(typeof(Sonuc<List<CategoryResponseDTO>>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetCategories()
@@ -68,27 +82,67 @@ namespace BlogProject.Api.Controllers
 
 
 
-        [HttpGet("/Category/{id}")]
-        public async Task<IActionResult> GetCategory(int id)
+        [HttpGet("/ActiveCategories")]
+        [ProducesResponseType(typeof(Sonuc<List<CategoryResponseDTO>>), (int)HttpStatusCode.OK)]
+
+        public async Task<IActionResult> GetCategories_Active()
         {
-            var category = await _categoryServise.GetAsync(q=>q.id==id);
-
-            if (category != null)
+            var categories = await _categoryServise.GetAllAsync(q => q.IsActive == true && q.IsDelete == false);
+            //categories = null;
+            if (categories != null)
             {
-                CategoryResponseDTO categoryResponseDTO = new();
-                
-                    categoryResponseDTO=_mapper.Map<CategoryResponseDTO>(category);
+                List<CategoryResponseDTO> categoryDTOResponseList = new();
 
-               
-                return Ok(Sonuc<CategoryResponseDTO>.SuccussWithData(categoryResponseDTO));
+                foreach (var category in categories)
+                {
+                    categoryDTOResponseList.Add(_mapper.Map<CategoryResponseDTO>(category));
+                }
+                return Ok(Sonuc<List<CategoryResponseDTO>>.SuccussWithData(categoryDTOResponseList));
             }
             else
             {
-
                 return NotFound(Sonuc<List<CategoryResponseDTO>>.SuccussNoDataFound());
-
             }
         }
-    }
 
+
+        [HttpGet("/Category/{categoryGUID}")]
+        [ProducesResponseType(typeof(Sonuc<List<CategoryResponseDTO>>), (int)HttpStatusCode.OK)]
+
+        public async Task<IActionResult> GetCategory(Guid categoryGUID)
+        {
+            var category = await _categoryServise.GetAsync(q => q.Guid == categoryGUID);
+            //categories = null;
+            if (category != null)
+            {
+                CategoryResponseDTO categoryDTOResponse = new();
+
+
+                categoryDTOResponse = _mapper.Map<CategoryResponseDTO>(category);
+
+                return Ok(Sonuc<CategoryResponseDTO>.SuccussWithData(categoryDTOResponse));
+            }
+            else
+            {
+                return NotFound(Sonuc<List<CategoryResponseDTO>>.SuccussNoDataFound());
+            }
+
+
+
+        }
+
+        [HttpPost("/RemoveCategory")]
+        [ProducesResponseType(typeof(Sonuc<bool>), (int)HttpStatusCode.OK)]
+
+        public async Task<IActionResult> RemoveCategory(CategoryRequestDTO categoryDTORequest)
+        {
+            Category category = await _categoryServise.GetAsync(q => q.Guid == categoryDTORequest.Guid);
+            category.IsActive = false;
+            category.IsDelete = true;
+            await _categoryServise.UpdateAsync(category);
+            return Ok(Sonuc<bool>.SuccussWithData(true));
+        }
+
+    }
 }
+   

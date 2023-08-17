@@ -7,7 +7,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ShoppingAPI.Api.Middleware
+namespace BlogProject.Api.Middleware
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class GlobalExceptionMiddleware
@@ -31,7 +31,7 @@ namespace ShoppingAPI.Api.Middleware
             {
                 if (e.GetType() == typeof(FieldValidationException))
                 {
-                    List<string>? errors = e.Data["FieldValidationMessage"] as List<string>;
+                    List<string> errors = e.Data["FieldValidationMessage"] as List<string>;
 
                     httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     httpContext.Response.ContentType = "application/json";

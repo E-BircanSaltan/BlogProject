@@ -9,7 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace ShoppingAPI.Api.Controllers
+namespace BlogProject.Api.Controllers
 {
     [ApiController]
     [Route("[action")]

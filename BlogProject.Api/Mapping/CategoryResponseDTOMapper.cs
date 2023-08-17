@@ -14,7 +14,22 @@ namespace BlogProject.Api.Mapping
                {
                    opt.MapFrom(src => src.Name);
 
+               })
+               .ForMember(dest => dest.Active, opt =>
+               {
+                   opt.MapFrom(src => src.IsActive);
+
+               })
+               .ForMember(dest => dest.Delete, opt =>
+               {
+                   opt.MapFrom(src => src.IsDelete);
+
                }).ReverseMap();
         }
+
+        
     }
+
 }
+
+

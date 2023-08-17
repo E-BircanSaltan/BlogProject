@@ -10,6 +10,9 @@ namespace BlogProject.Entity.DTO.Category
     {
         public Guid Guid { get; set; }
         public string Name { get; set; }
+
+        public bool Delete { get; set; }
+        public bool Active { get; set; }
         
     }
 }

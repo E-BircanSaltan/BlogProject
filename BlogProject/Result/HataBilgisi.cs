@@ -8,30 +8,30 @@ namespace BlogProject.Entity.Result
 {
     public class HataBilgisi
     {
-        public object? Hata { get; set; }
+        public List<string> Hata { get; set; }
         public string HataAciklama { get; set; }   
         
-        public static HataBilgisi NotFound(string hataAciklama="Sonuç Bulunamadı",object hata=null )
+        public static HataBilgisi NotFound(string hataAciklama="Sonuç Bulunamadı", List<string> hata =null )
         {
             return new HataBilgisi() { HataAciklama = hataAciklama, Hata = hata };
         }
 
-        public static HataBilgisi Error(object? hata = null, string hataAciklama = "Hata Oluştu")
+        public static HataBilgisi Error(List<string> hata = null, string hataAciklama = "Hata Oluştu")
         {
             return new HataBilgisi() { HataAciklama = hataAciklama, Hata = hata };
         }
 
-        public static HataBilgisi FieldValidationError(object? hata=null,string hataAciklama="Zorunlu alanlar Eksik")
+        public static HataBilgisi FieldValidationError(List<string> hata=null,string hataAciklama="Zorunlu alanlar Eksik")
         {
             return new HataBilgisi { Hata = hata, HataAciklama = hataAciklama };
         }
 
-        public static HataBilgisi TokenNotFoundError(object? hata = null, string hataAciklama = "Token Bilgisi Gelmedi")
+        public static HataBilgisi TokenNotFoundError(List<string> hata = null, string hataAciklama = "Token Bilgisi Gelmedi")
         {
             return new HataBilgisi { Hata = hata, HataAciklama = hataAciklama };
         }
 
-        public static HataBilgisi TokenValidationError(object? hata = null, string hataAciklama = "Token Geçerli Değil")
+        public static HataBilgisi TokenValidationError(List<string> hata = null, string hataAciklama = "Token Geçerli Değil")
         {
             return new HataBilgisi { Hata = hata, HataAciklama = hataAciklama };
         }

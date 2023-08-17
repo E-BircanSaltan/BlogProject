@@ -10,7 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShoppingAPI.Api.Middleware
+namespace BlogProject.Api.Middleware
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class ApiAuthorizationMiddleware
