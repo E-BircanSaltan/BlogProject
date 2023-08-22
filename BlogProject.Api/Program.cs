@@ -1,3 +1,5 @@
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using BlogProject.Api.Middleware;
 using BlogProject.Business.Abstract;
 using BlogProject.Business.Concrete;
@@ -5,8 +7,6 @@ using BlogProject.DAL.Abstract.DataManagent;
 using BlogProject.DAL.Concrete.EntityFramework.Context;
 using BlogProject.DAL.Concrete.EntityFramework.DataManagement;
 using BlogProject.Helper.Globals;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +32,7 @@ builder.Services.Configure<JWTExceptURLList>(builder.Configuration.GetSection(na
 var app = builder.Build();
 
 app.UseApiAuthorizationMiddleware();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

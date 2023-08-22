@@ -4,12 +4,12 @@ using BlogProject.Entity.Poco;
 
 namespace BlogProject.Api.Mapping
 {
-    public class ArticleResponseDTOMapper : Profile
+    public class ArticleRequestDTOMapper : Profile
     {
 
-        public ArticleResponseDTOMapper()
+        public ArticleRequestDTOMapper()
         {
-            CreateMap<Article, ArticleResponseDTO>()
+            CreateMap<Article, ArticleRequestDTO>()
                .ForMember(dest => dest.Guid, opt =>
                {
                    opt.MapFrom(src => src.Guid);
@@ -38,7 +38,7 @@ namespace BlogProject.Api.Mapping
         }
 
 
-        
+
     }
 }
     

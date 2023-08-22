@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using BlogProject.Api.Aspects;
 using BlogProject.Api.Validation.FluentValidation;
 using BlogProject.Business.Abstract;
@@ -6,7 +7,7 @@ using BlogProject.Entity.DTO.Category;
 using BlogProject.Entity.DTO.User;
 using BlogProject.Entity.Poco;
 using BlogProject.Entity.Result;
-using Microsoft.AspNetCore.Mvc;
+using BlogProject.Helper.CustomException;
 using System.Net;
 
 namespace BlogProject.Api.Controllers
@@ -88,7 +89,7 @@ namespace BlogProject.Api.Controllers
         public async Task<IActionResult> GetCategories_Active()
         {
             var categories = await _categoryServise.GetAllAsync(q => q.IsActive == true && q.IsDelete == false);
-            //categories = null;
+           
             if (categories != null)
             {
                 List<CategoryResponseDTO> categoryDTOResponseList = new();
@@ -112,7 +113,7 @@ namespace BlogProject.Api.Controllers
         public async Task<IActionResult> GetCategory(Guid categoryGUID)
         {
             var category = await _categoryServise.GetAsync(q => q.Guid == categoryGUID);
-            //categories = null;
+            
             if (category != null)
             {
                 CategoryResponseDTO categoryDTOResponse = new();

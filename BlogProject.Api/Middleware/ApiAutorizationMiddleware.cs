@@ -56,11 +56,11 @@ namespace BlogProject.Api.Middleware
                         httpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                     }
 
-                    string? kullaniciAdi = jwtToken.Claims.Where(q => q.Type == "kullaniciAdi").Select(q => q.Value).SingleOrDefault();
+                    string kullaniciAdi = jwtToken.Claims.Where(q => q.Type == "kullaniciAdi").Select(q => q.Value).SingleOrDefault();
 
                     int kullaniciID = Convert.ToInt32(jwtToken.Claims.Where(q => q.Type == "kullaniciID").Select(q => q.Value).SingleOrDefault());
 
-                    string? AdSoyad = jwtToken.Claims.Where(q => q.Type == "adSoyad").Select(q => q.Value).SingleOrDefault();
+                    string AdSoyad = jwtToken.Claims.Where(q => q.Type == "adSoyad").Select(q => q.Value).SingleOrDefault();
 
                     if (string.IsNullOrEmpty(kullaniciAdi) || kullaniciID == null)
                     {

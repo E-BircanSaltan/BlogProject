@@ -1,5 +1,6 @@
 ﻿using BlogProject.Entity.DTO.User;
 using FluentValidation;
+using System.Data;
 
 namespace BlogProject.Api.Validation.FluentValidation
 {
@@ -11,7 +12,6 @@ namespace BlogProject.Api.Validation.FluentValidation
             RuleFor(q => q.Soyadi).NotEmpty().WithMessage("Soyadı Boş Olamaz");
             RuleFor(q => q.KullaniciAdi).NotEmpty().WithMessage("Kullanıcı Adı Boş Olamaz");
             RuleFor(q => q.Sifre).NotEmpty().WithMessage("Şifre Boş Olamaz");
-
 
 
         }

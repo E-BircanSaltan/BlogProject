@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using BlogProject.Api.Validation.FluentValidation;
 using BlogProject.Business.Abstract;
 using BlogProject.Entity.DTO.Category;
@@ -6,7 +7,6 @@ using BlogProject.Entity.DTO.User;
 using BlogProject.Entity.Poco;
 using BlogProject.Entity.Result;
 using BlogProject.Helper.CustomException;
-using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace BlogProject.Api.Controllers
@@ -75,13 +75,13 @@ namespace BlogProject.Api.Controllers
             }
             else
             {
-                List<string> ValidatorMessage = new List<string>();
+                List<string> ValidatonMessage = new List<string>();
                 for (int i = 0; i < userRegisterValidation.Validate(userRequestDTO).Errors.Count; i++)
                 {
-                    ValidatorMessage.Add(userRegisterValidation.Validate(userRequestDTO).Errors[i].ErrorMessage);
+                    ValidatonMessage.Add(userRegisterValidation.Validate(userRequestDTO).Errors[i].ErrorMessage);
 
                 }
-                throw new FieldValidationException(ValidatorMessage);
+                throw new FieldValidationException(ValidatonMessage);
             }
         }
     }
